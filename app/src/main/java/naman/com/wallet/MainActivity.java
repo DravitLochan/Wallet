@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void pass() {
-        Intent intent = new Intent(this,User.class);
+        Intent intent = new Intent(this,DrawerActivity.class);
         startActivity(intent);
         finish();
     }

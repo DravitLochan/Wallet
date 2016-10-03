@@ -16,10 +16,6 @@ public class User extends AppCompatActivity  {
     Button logout;
     SessionManager manager;
     Context context;
-    DrawerLayout drawerLayout;
-    //ActionBarDrawerToggle mDrawerToggle;
-    String[] contents;
-    ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,32 +39,6 @@ public class User extends AppCompatActivity  {
                 manager.logout();
             }
         });
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        contents= getResources().getStringArray(R.array.contents);
-        mListView=(ListView) findViewById(R.id.left_drawer);
-        mListView.setAdapter(new ArrayAdapter<String>(context,R.layout.drawer_list_item,contents));
-        mListView.setOnItemClickListener(new DrawerItemClickListener());
 
-        drawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
-            @Override
-            public void onDrawerSlide(View drawerView, float slideOffset) {
-
-            }
-
-            @Override
-            public void onDrawerOpened(View drawerView) {
-
-            }
-
-            @Override
-            public void onDrawerClosed(View drawerView) {
-
-            }
-
-            @Override
-            public void onDrawerStateChanged(int newState) {
-
-            }
-        });
     }
 }
