@@ -73,7 +73,7 @@ public class DrawerActivity extends AppCompatActivity {
         }
 
         private void selectItem(int i) {
-            Fragment fragment = new FragmentGenerator();
+            Fragment fragment = new User();
             Bundle bundle= new Bundle();
             bundle.putInt(FragmentGenerator.position,i);
             fragment.setArguments(bundle);
