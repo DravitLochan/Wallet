@@ -56,11 +56,7 @@ public class DrawerActivity extends AppCompatActivity {
     }
 
     private void defaultFragment() {
-        Fragment fragment = new FragmentGenerator();
-        Bundle bundle= new Bundle();
-        bundle.putInt(FragmentGenerator.position,1);
-        fragment.setArguments(bundle);
-
+        Fragment fragment = new User();
         FragmentManager fm = getFragmentManager();
         //TODO: try this with add
         fm.beginTransaction().replace(R.id.content_frame,fragment).commit();
@@ -73,41 +69,23 @@ public class DrawerActivity extends AppCompatActivity {
         }
 
         private void selectItem(int i) {
-            Fragment fragment = new User();
-            Bundle bundle= new Bundle();
-            bundle.putInt(FragmentGenerator.position,i);
-            fragment.setArguments(bundle);
+            Fragment fragment = null;
+            switch(i)
+            {
+                case 0:
+                    fragment=new User();
+                    break;
+                case 1:
+                    //fix here for null ptr exception
+                    break;
+                case 2:
+                    break;
 
+            }
             FragmentManager fm = getFragmentManager();
             //TODO: try this with add
             fm.beginTransaction().replace(R.id.content_frame,fragment).commit();
-
             drawerLayout.closeDrawer(mListView);
-        }
-    }
-
-    public static class FragmentGenerator extends Fragment {
-        public static String position="position";
-        public FragmentGenerator() {
-            super();
-        }
-
-        @Nullable
-        @Override
-        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-            int activity=0;
-            int i=getArguments().getInt(position);
-            switch(i)
-            {
-                case 1:
-                    activity=R.layout.activity_user;
-                break;
-                default:
-                    activity=R.layout.activity_user;
-            }
-            View fragment = inflater.inflate(activity,container,false);
-            return fragment;
         }
     }
 }
