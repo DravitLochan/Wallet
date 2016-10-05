@@ -7,6 +7,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,7 @@ public class User extends Fragment {
 
 
     private void initUI(View root) {
+
         manager= new SessionManager(context);
         email=(TextView)root.findViewById(R.id.emailid);
         name=(TextView)root.findViewById(R.id.name);

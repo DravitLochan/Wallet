@@ -1,11 +1,14 @@
 package naman.com.wallet;
 
+import android.content.res.Configuration;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,19 +22,21 @@ public class DrawerActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     String[] content;
     ListView mListView;
+    private ActionBarDrawerToggle mDrawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer);
-
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         content= getResources().getStringArray(R.array.contents);
         mListView=(ListView) findViewById(R.id.left_drawer);
         mListView.setAdapter(new ArrayAdapter<>(this,R.layout.drawer_list_item,R.id.text1,content));
 
         mListView.setOnItemClickListener(new DrawerItemClickListener());
-        drawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
+        /*drawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
 
@@ -52,8 +57,36 @@ public class DrawerActivity extends AppCompatActivity {
 
             }
         });
+        */
+        mDrawerToggle = new ActionBarDrawerToggle(this,
+                drawerLayout,myToolbar,R.string.a,R.string.b){
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
+        };
+        drawerLayout.setDrawerListener(mDrawerToggle);
+
         defaultFragment();
 
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
     private void defaultFragment() {
