@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="contents">
-        <item>A</item>
-        <item>B</item>
-        <item>C</item>
+        <item>Overview</item>
+        <item>Entry</item>
+        <item>Stats</item>
+        <item>Manage</item>
     </array>
 </resources>

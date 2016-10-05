@@ -28,7 +28,7 @@ public class DrawerActivity extends AppCompatActivity {
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         content= getResources().getStringArray(R.array.contents);
         mListView=(ListView) findViewById(R.id.left_drawer);
-        mListView.setAdapter(new ArrayAdapter<String>(this,R.layout.drawer_list_item,R.id.text1,content));
+        mListView.setAdapter(new ArrayAdapter<>(this,R.layout.drawer_list_item,R.id.text1,content));
 
         mListView.setOnItemClickListener(new DrawerItemClickListener());
         drawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
@@ -53,10 +53,12 @@ public class DrawerActivity extends AppCompatActivity {
             }
         });
         defaultFragment();
+
     }
 
     private void defaultFragment() {
         Fragment fragment = new User();
+        mListView.setItemChecked(0,true);
         FragmentManager fm = getFragmentManager();
         //TODO: try this with add
         fm.beginTransaction().replace(R.id.content_frame,fragment).commit();
@@ -77,10 +79,14 @@ public class DrawerActivity extends AppCompatActivity {
                     break;
                 case 1:
                     //fix here for null ptr exception
+                        fragment= new Entry();
                     break;
                 case 2:
+                        fragment= new Stats();
                     break;
-
+                case 3:
+                        fragment= new Manage();
+                    break;
             }
             FragmentManager fm = getFragmentManager();
             //TODO: try this with add
