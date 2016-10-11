@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -23,6 +24,8 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.PointsGraphSeries;
+
+import java.util.ArrayList;
 
 public class User extends Fragment {
     @Nullable
@@ -54,17 +57,37 @@ public class User extends Fragment {
     SessionManager manager;
     Context context;
     GraphView graph;
+    ListView lvActivity;
+    ArrayList<UserEntry> arrayUserEntry;
+
 
     private void initUI(View root) {
         graph = (GraphView) root.findViewById(R.id.graph);
         manager= new SessionManager(context);
-        logout=(Button)root.findViewById(R.id.button_logout) ;
+        lvActivity = (ListView) root.findViewById(R.id.listview_activity);
+         arrayUserEntry = new ArrayList<>();
+        EntryUserAdapter adapter = new EntryUserAdapter(context,arrayUserEntry);
+        lvActivity.setAdapter(adapter);
+        populateData();
+        /*logout=(Button)root.findViewById(R.id.button_logout) ;
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 manager.logout();
             }
-        });
+        });*/
 
+
+    }
+
+    private void populateData() {
+        UserEntry entry1= new UserEntry("Burger","Thu",-50);
+        UserEntry entry2= new UserEntry("Pizza","Thu",-250);
+        UserEntry entry3= new UserEntry("Salary","Thu",5000);
+        UserEntry entry4= new UserEntry("Paypal","Thu",1700);
+        arrayUserEntry.add(entry1);
+        arrayUserEntry.add(entry3);
+        arrayUserEntry.add(entry2);
+        arrayUserEntry.add(entry4);
     }
 }
